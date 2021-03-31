@@ -1,0 +1,8 @@
+@tailwind base;
+@tailwind components;
+/* Write your utility classes here */
+@tailwind utilities;
+
+body {
+  background: cornsilk;
+}
