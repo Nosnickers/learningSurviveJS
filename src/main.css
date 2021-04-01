@@ -5,4 +5,8 @@
 
 body {
   background: cornsilk;
+
+  background-image: url("./smallShot.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }

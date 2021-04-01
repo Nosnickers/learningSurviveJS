@@ -11,11 +11,15 @@ const commonConfig = merge([
   { entry: ["./src"] },
   parts.page({ title: "Demo" }),
   // parts.loadCSS(),
-  parts.extractCSS({ loaders: cssLoaders })
+  parts.loadImages({ limit: 15000 }),
+  parts.extractCSS({ loaders: cssLoaders }),
+  parts.eliminateUnusedCSS()
 ]);
 
 
-const productionConfig = merge([parts.eliminateUnusedCSS()]);
+const productionConfig = merge([
+
+]);
 
 
 const developmentConfig = merge([
