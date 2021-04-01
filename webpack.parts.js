@@ -96,3 +96,14 @@ exports.loadImages = ({ limit } = {}) => ({
     ],
   },
 });
+
+const APP_SOURCE = path.join(__dirname, "src");
+
+exports.loadJavaScript = () => ({
+  module: {
+    rules: [
+      // Consider extracting include as a parameter
+      { test: /\.js$/, include: APP_SOURCE, use: "babel-loader" },
+    ],
+  },
+});

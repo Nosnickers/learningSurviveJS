@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "wp --mode production",
+    "build": "wp",
+    "build:none": "wp --mode none",
+    "build:legacy": "wp --mode prod:legacy",
+    "build:modern": "wp --mode prod:modern",
     "start": "wp --mode development",
     "watch": "nodemon --watch webpack.*.js --exec \"npm start\""
   },
@@ -14,7 +17,10 @@
   "license": "ISC",
   "dependencies": {},
   "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
     "autoprefixer": "^10.2.5",
+    "babel-loader": "^8.2.2",
     "css-loader": "^5.2.0",
     "glob": "^7.1.6",
     "mini-css-extract-plugin": "^1.4.0",

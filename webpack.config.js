@@ -2,10 +2,7 @@ const { mode } = require("webpack-nano/argv");
 const { merge } = require("webpack-merge");
 const parts = require("./webpack.parts");
 
-const cssLoaders = [
-  parts.autoprefix(), 
-  parts.tailwind()
-];
+const cssLoaders = [parts.autoprefix(), parts.tailwind()];
 
 const commonConfig = merge([
   { entry: ["./src"] },
@@ -13,28 +10,31 @@ const commonConfig = merge([
   // parts.loadCSS(),
   parts.loadImages({ limit: 15000 }),
   parts.extractCSS({ loaders: cssLoaders }),
-  parts.eliminateUnusedCSS()
+  parts.eliminateUnusedCSS(),
+  parts.loadJavaScript(),
 ]);
 
-
-const productionConfig = merge([
-
-]);
-
+const productionConfig = merge([{ mode: 'production' }]);
 
 const developmentConfig = merge([
   { entry: ["webpack-plugin-serve/client"] },
   parts.devServer(),
 ]);
 
-const getConfig = (mode) => {
+const getConfig = (mode = "production") => {
   switch (mode) {
-    case "production":
-      return merge(commonConfig, productionConfig, { mode });
+    case "prod:legacy":
+      process.env.BROWSERSLIST_ENV = "legacy";
+      return merge(commonConfig, productionConfig);
+    case "prod:modern":
+      process.env.BROWSERSLIST_ENV = "modern";
+      return merge(commonConfig, productionConfig);
     case "development":
       return merge(commonConfig, developmentConfig, { mode });
+    case "production":
     default:
-      throw new Error(`Trying to use an unknown mode, ${mode}`);
+      return merge(commonConfig, productionConfig, { mode });
+    // throw new Error(`Trying to use an unknown mode, ${mode}`);
   }
 };
 

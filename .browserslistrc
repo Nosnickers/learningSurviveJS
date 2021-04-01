@@ -1,3 +1,7 @@
+# Let's support old IE
+[legacy]
+IE 8
+
+# Make this more specific if you want
+[modern]
 > 1% # Browser usage over 1%
-Last 2 versions # Or last two versions
-IE 8 # Or IE 8
