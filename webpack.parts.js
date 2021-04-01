@@ -3,8 +3,8 @@ const {
   MiniHtmlWebpackPlugin,
 } = require("mini-html-webpack-plugin");
 
-exports.devServer = () => ({
-  watch: true,
+exports.devServer = (compi) => ({
+  watch: !compi,
   plugins: [
     new WebpackPluginServe({
       port: process.env.PORT || 8080,

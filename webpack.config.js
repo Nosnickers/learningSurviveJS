@@ -1,4 +1,4 @@
-const { mode } = require("webpack-nano/argv");
+const { mode, compi } = require("webpack-nano/argv");
 const { merge } = require("webpack-merge");
 const parts = require("./webpack.parts");
 
@@ -14,11 +14,11 @@ const commonConfig = merge([
   parts.loadJavaScript(),
 ]);
 
-const productionConfig = merge([{ mode: 'production' }]);
+const productionConfig = merge([{ mode: "production" }]);
 
 const developmentConfig = merge([
   { entry: ["webpack-plugin-serve/client"] },
-  parts.devServer(),
+  parts.devServer(compi),
 ]);
 
 const getConfig = (mode = "production") => {
@@ -29,6 +29,8 @@ const getConfig = (mode = "production") => {
     case "prod:modern":
       process.env.BROWSERSLIST_ENV = "modern";
       return merge(commonConfig, productionConfig);
+    case "build:dev":
+      return merge(commonConfig, developmentConfig, { mode, compi });
     case "development":
       return merge(commonConfig, developmentConfig, { mode });
     case "production":
