@@ -1,7 +1,7 @@
 # Make this more specific if you want
-[modern]
+# [modern]
 > 1% # Browser usage over 1%
 
 # Let's support old IE
-[legacy]
+# [legacy]
 IE 8

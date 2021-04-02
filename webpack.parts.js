@@ -113,7 +113,7 @@ exports.generateSourceMaps = ({ type }) => {
   return { 
     devtool: type,
     output: {
-      sourceMapFilename: "[chunkhash]-[id].map"
+      sourceMapFilename: "[chunkhash]-[file].map"
     }
   }
 };

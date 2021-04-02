@@ -33,12 +33,13 @@ const developmentConfig = merge([
 
 const getConfig = (mode = "production") => {
   switch (mode) {
-    case "prod:legacy":
-      process.env.BROWSERSLIST_ENV = "legacy";
-      return merge(commonConfig, productionConfig);
-    case "prod:modern":
-      process.env.BROWSERSLIST_ENV = "modern";
-      return merge(commonConfig, productionConfig);
+    // 动态编译不同环境 和 动态加载间有问题 TODO
+    // case "prod:legacy":
+    //   process.env.BROWSERSLIST_ENV = "legacy";
+    //   return merge(commonConfig, productionConfig);
+    // case "prod:modern":
+    //   process.env.BROWSERSLIST_ENV = "modern";
+    //   return merge(commonConfig, productionConfig);
     case "build:dev":
       return merge(commonConfig, developmentConfig, { mode, compi });
     case "development":
