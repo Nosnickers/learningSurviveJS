@@ -5,7 +5,11 @@ const parts = require("./webpack.parts");
 const cssLoaders = [parts.autoprefix(), parts.tailwind()];
 
 const commonConfig = merge([
-  { entry: ["./src"] },
+  {
+    entry: [
+      "./src",
+    ],
+  },
   parts.page({ title: "Demo" }),
   // parts.loadCSS(),
   parts.loadImages({ limit: 15000 }),
@@ -20,7 +24,9 @@ const productionConfig = merge([
 ]);
 
 const developmentConfig = merge([
-  { entry: ["webpack-plugin-serve/client"] },
+  {
+    entry: ["webpack-plugin-serve/client"],
+  },
   parts.devServer(compi),
   parts.generateSourceMaps({ type: "eval-source-map" }),
 ]);
