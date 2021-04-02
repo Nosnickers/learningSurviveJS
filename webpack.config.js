@@ -14,11 +14,15 @@ const commonConfig = merge([
   parts.loadJavaScript(),
 ]);
 
-const productionConfig = merge([{ mode: "production" }]);
+const productionConfig = merge([
+  { mode: "production" },
+  parts.generateSourceMaps({ type: "hidden-source-map" }),
+]);
 
 const developmentConfig = merge([
   { entry: ["webpack-plugin-serve/client"] },
   parts.devServer(compi),
+  parts.generateSourceMaps({ type: "eval-source-map" }),
 ]);
 
 const getConfig = (mode = "production") => {

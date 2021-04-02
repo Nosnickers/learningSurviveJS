@@ -107,3 +107,13 @@ exports.loadJavaScript = () => ({
     ],
   },
 });
+
+// https://survivejs.com/webpack/building/source-maps/
+exports.generateSourceMaps = ({ type }) => {
+  return { 
+    devtool: type,
+    output: {
+      sourceMapFilename: "[chunkhash]-[id].map"
+    }
+  }
+};
