@@ -21,19 +21,10 @@ const commonConfig = merge([
 
 const productionConfig = merge([
   { mode: "production" },
-  {
-    entry: {
-      app: {
-        import: path.join(__dirname, "src", "index.js"),
-        dependOn: "vendor",
-      },
-      vendor: ["react", "react-dom"],
-    },
-  },
   parts.generateSourceMaps({ type: "hidden-source-map" }),
   parts.bundleSplit(),
   parts.attachRevision(),
-
+  parts.minifyJavaScript(),
 ]);
 
 const developmentConfig = merge([

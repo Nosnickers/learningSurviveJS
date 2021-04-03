@@ -56,18 +56,25 @@ exports.tailwind = () => ({
 });
 
 exports.bundleSplit = () => ({
-  optimization: {
-    splitChunks: {
-      // css/mini-extra is injected by mini-css-extract-plugin
-      minSize: { javascript: 20000, "css/mini-extra": 10000 },
-    },
-  },
-  // plugins: [
-  //   new webpack.optimize.AggressiveSplittingPlugin({
-  //     minSize: 10000,
-  //     maxSize: 30000,
-  //   }),
-  // ],
+  // entry: {
+  //   app: {
+  //     import: path.join(__dirname, "src", "index.js"),
+  //     dependOn: "vendor",
+  //   },
+  //   vendor: ["react", "react-dom"],
+  // },
+  // optimization: {
+  //   splitChunks: {
+  //     // css/mini-extra is injected by mini-css-extract-plugin
+  //     minSize: { javascript: 20000, "css/mini-extra": 10000 },
+  //   },
+  // },
+  plugins: [
+    new webpack.optimize.AggressiveSplittingPlugin({
+      minSize: 10000,
+      maxSize: 30000,
+    }),
+  ],
 });
 
 const path = require("path");
@@ -139,4 +146,9 @@ exports.attachRevision = () => ({
       banner: new GitRevisionPlugin().version(),
     }),
   ],
+});
+
+const TerserPlugin = require("terser-webpack-plugin");
+exports.minifyJavaScript = () => ({
+  optimization: { minimizer: [new TerserPlugin()] },
 });
