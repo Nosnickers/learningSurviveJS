@@ -1,14 +1,15 @@
 const { mode, compi } = require("webpack-nano/argv");
 const { merge } = require("webpack-merge");
 const parts = require("./webpack.parts");
+const path = require("path");
 
 const cssLoaders = [parts.autoprefix(), parts.tailwind()];
 
 const commonConfig = merge([
+  { output: { path: path.resolve(process.cwd(), "dist") } },
+  parts.clean(),
   {
-    entry: [
-      "./src",
-    ],
+    entry: ["./src"],
   },
   parts.page({ title: "Demo" }),
   // parts.loadCSS(),
@@ -20,7 +21,19 @@ const commonConfig = merge([
 
 const productionConfig = merge([
   { mode: "production" },
+  {
+    entry: {
+      app: {
+        import: path.join(__dirname, "src", "index.js"),
+        dependOn: "vendor",
+      },
+      vendor: ["react", "react-dom"],
+    },
+  },
   parts.generateSourceMaps({ type: "hidden-source-map" }),
+  parts.bundleSplit(),
+  parts.attachRevision(),
+
 ]);
 
 const developmentConfig = merge([

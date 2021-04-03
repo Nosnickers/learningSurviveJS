@@ -1,7 +1,7 @@
 const { WebpackPluginServe } = require("webpack-plugin-serve");
-const {
-  MiniHtmlWebpackPlugin,
-} = require("mini-html-webpack-plugin");
+const { MiniHtmlWebpackPlugin } = require("mini-html-webpack-plugin");
+const webpack = require("webpack")
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 exports.devServer = (compi) => ({
   watch: !compi,
@@ -21,9 +21,7 @@ exports.page = ({ title }) => ({
 
 exports.loadCSS = () => ({
   module: {
-    rules: [
-      { test: /\.css$/, use: ["style-loader", "css-loader"] },
-    ],
+    rules: [{ test: /\.css$/, use: ["style-loader", "css-loader"] }],
   },
 });
 
@@ -57,12 +55,26 @@ exports.tailwind = () => ({
   },
 });
 
+exports.bundleSplit = () => ({
+  optimization: {
+    splitChunks: {
+      // css/mini-extra is injected by mini-css-extract-plugin
+      minSize: { javascript: 20000, "css/mini-extra": 10000 },
+    },
+  },
+  // plugins: [
+  //   new webpack.optimize.AggressiveSplittingPlugin({
+  //     minSize: 10000,
+  //     maxSize: 30000,
+  //   }),
+  // ],
+});
+
 const path = require("path");
 const glob = require("glob");
 const PurgeCSSPlugin = require("purgecss-webpack-plugin");
 
 const ALL_FILES = glob.sync(path.join(__dirname, "src/*.js"));
-
 exports.eliminateUnusedCSS = () => ({
   plugins: [
     new PurgeCSSPlugin({
@@ -110,10 +122,21 @@ exports.loadJavaScript = () => ({
 
 // https://survivejs.com/webpack/building/source-maps/
 exports.generateSourceMaps = ({ type }) => {
-  return { 
+  return {
     devtool: type,
     output: {
-      sourceMapFilename: "[chunkhash]-[file].map"
-    }
-  }
+      sourceMapFilename: "[file]-[chunkhash].map",
+    },
+  };
 };
+
+exports.clean = () => ({ plugins: [new CleanWebpackPlugin()] });
+
+const GitRevisionPlugin = require("git-revision-webpack-plugin");
+exports.attachRevision = () => ({
+  plugins: [
+    new webpack.BannerPlugin({
+      banner: new GitRevisionPlugin().version(),
+    }),
+  ],
+});
