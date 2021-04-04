@@ -9,7 +9,9 @@ const commonConfig = merge([
   {
     output: {
       path: path.resolve(process.cwd(), "dist"),
+      chunkFilename: "[name].[contenthash].js",
       filename: "[name].[contenthash].js",
+      assetModuleFilename: "[name].[contenthash][ext][query]",
     },
   },
   parts.clean(),
