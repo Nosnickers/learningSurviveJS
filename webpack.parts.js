@@ -1,10 +1,19 @@
 const { WebpackPluginServe } = require("webpack-plugin-serve");
 const { MiniHtmlWebpackPlugin } = require("mini-html-webpack-plugin");
-const webpack = require("webpack")
+const webpack = require("webpack");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 
 exports.devServer = (compi) => ({
   watch: !compi,
+  optimization: {
+    usedExports: true,
+    // splitChunks: {
+    //   sideEffects: [
+    //     "*.css",
+    //     // "@babel/polyfill"
+    //   ],
+    // },
+  },
   plugins: [
     new WebpackPluginServe({
       port: process.env.PORT || 8080,
@@ -63,18 +72,20 @@ exports.bundleSplit = () => ({
   //   },
   //   vendor: ["react", "react-dom"],
   // },
-  // optimization: {
-  //   splitChunks: {
-  //     // css/mini-extra is injected by mini-css-extract-plugin
-  //     minSize: { javascript: 20000, "css/mini-extra": 10000 },
-  //   },
-  // },
-  plugins: [
-    new webpack.optimize.AggressiveSplittingPlugin({
-      minSize: 10000,
+  optimization: {
+    splitChunks: {
       maxSize: 30000,
-    }),
-  ],
+      // css/mini-extra is injected by mini-css-extract-plugin
+      minSize: { javascript: 10000, "css/mini-extra": 5000 },
+      // usedExports: true
+    },
+  },
+  // plugins: [
+  //   new webpack.optimize.AggressiveSplittingPlugin({
+  //     minSize: 10000,
+  //     maxSize: 30000,
+  //   }),
+  // ],
 });
 
 const path = require("path");
@@ -157,8 +168,6 @@ const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 exports.minifyCSS = ({ options }) => ({
   optimization: {
-    minimizer: [
-      new CssMinimizerPlugin({ minimizerOptions: options }),
-    ],
+    minimizer: [new CssMinimizerPlugin({ minimizerOptions: options })],
   },
 });

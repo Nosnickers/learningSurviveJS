@@ -15,18 +15,19 @@ const commonConfig = merge([
   // parts.loadCSS(),
   parts.loadImages({ limit: 15000 }),
   parts.extractCSS({ loaders: cssLoaders }),
-  parts.eliminateUnusedCSS(),
+  // parts.eliminateUnusedCSS(),
   parts.loadJavaScript(),
 ]);
 
 const productionConfig = merge([
   { mode: "production" },
-  parts.generateSourceMaps({ type: "hidden-source-map" }),
+  // parts.generateSourceMaps({ type: "hidden-source-map" }),
+  parts.generateSourceMaps({ type: "source-map" }),
   parts.bundleSplit(),
   parts.attachRevision(),
   parts.minifyJavaScript(),
   parts.minifyCSS({ options: { preset: ["default"] } }),
-
+  parts.eliminateUnusedCSS(),
 ]);
 
 const developmentConfig = merge([
@@ -34,7 +35,9 @@ const developmentConfig = merge([
     entry: ["webpack-plugin-serve/client"],
   },
   parts.devServer(compi),
-  parts.generateSourceMaps({ type: "eval-source-map" }),
+  parts.bundleSplit(),
+  parts.minifyJavaScript(),
+  parts.generateSourceMaps({ type: "source-map" }),
 ]);
 
 const getConfig = (mode = "production") => {

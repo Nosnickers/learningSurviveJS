@@ -4,13 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "wp",
+    "build:dev": "wp --mode development --compi 1",
+    "start": "wp --mode development",
     "build:none": "wp --mode none",
     "build:legacy": "wp --mode prod:legacy",
     "build:modern": "wp --mode prod:modern",
-    "start": "wp --mode development",
-    "build:dev": "wp --mode development --compi 1",
     "watch": "nodemon --watch webpack.*.js --exec \"npm start\""
   },
   "keywords": [],
