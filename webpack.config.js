@@ -25,6 +25,8 @@ const productionConfig = merge([
   parts.bundleSplit(),
   parts.attachRevision(),
   parts.minifyJavaScript(),
+  parts.minifyCSS({ options: { preset: ["default"] } }),
+
 ]);
 
 const developmentConfig = merge([

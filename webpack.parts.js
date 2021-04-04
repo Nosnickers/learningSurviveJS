@@ -152,3 +152,13 @@ const TerserPlugin = require("terser-webpack-plugin");
 exports.minifyJavaScript = () => ({
   optimization: { minimizer: [new TerserPlugin()] },
 });
+
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
+
+exports.minifyCSS = ({ options }) => ({
+  optimization: {
+    minimizer: [
+      new CssMinimizerPlugin({ minimizerOptions: options }),
+    ],
+  },
+});

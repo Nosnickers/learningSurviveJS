@@ -1,6 +1,9 @@
+import "./component.css";
+
 export default (text = "Hello world") => {
   const element = document.createElement("div");
-  element.className = "rounded bg-red-100 border max-w-md m-4 p-4";
+  element.className =
+    "rounded bg-red-100 border max-w-md m-4 p-4 xxx-minimize-css";
   element.innerHTML = text;
   element.onclick = () =>
     import("./lazy")

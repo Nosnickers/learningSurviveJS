@@ -10,3 +10,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.xxx-minimize-css {
+  border: 1px solid red;
+}
