@@ -6,7 +6,12 @@ const path = require("path");
 const cssLoaders = [parts.autoprefix(), parts.tailwind()];
 
 const commonConfig = merge([
-  { output: { path: path.resolve(process.cwd(), "dist") } },
+  {
+    output: {
+      path: path.resolve(process.cwd(), "dist"),
+      filename: "[name].[contenthash].js",
+    },
+  },
   parts.clean(),
   {
     entry: ["./src"],
@@ -17,6 +22,7 @@ const commonConfig = merge([
   parts.extractCSS({ loaders: cssLoaders }),
   // parts.eliminateUnusedCSS(),
   parts.loadJavaScript(),
+  parts.setFreeVariable("HELLO", "hello from config"),
 ]);
 
 const productionConfig = merge([
