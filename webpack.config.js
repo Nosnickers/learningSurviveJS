@@ -36,6 +36,7 @@ const productionConfig = merge([
   parts.minifyJavaScript(),
   parts.minifyCSS({ options: { preset: ["default"] } }),
   parts.eliminateUnusedCSS(),
+  { recordsPath: path.join(__dirname, "records.json") },
 ]);
 
 const developmentConfig = merge([

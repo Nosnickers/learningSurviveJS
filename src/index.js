@@ -2,8 +2,8 @@ import component from "./component";
 import imgCpt from './img-cmpt'
 import "./main.css";
 
-// import "react";
-// import "react-dom";
+import "react";
+import "react-dom";
 
 import { bake } from "./shake";
 

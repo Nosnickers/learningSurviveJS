@@ -77,8 +77,10 @@ exports.bundleSplit = () => ({
       maxSize: 30000,
       // css/mini-extra is injected by mini-css-extract-plugin
       minSize: { javascript: 10000, "css/mini-extra": 5000 },
-      // usedExports: true
+      // usedExports: true,
+      chunks: "all",
     },
+    runtimeChunk: { name: "runtime" },
   },
   // plugins: [
   //   new webpack.optimize.AggressiveSplittingPlugin({
