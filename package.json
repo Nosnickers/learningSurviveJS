@@ -10,7 +10,8 @@
     "build:none": "wp --mode none",
     "build:legacy": "wp --mode prod:legacy",
     "build:modern": "wp --mode prod:modern",
-    "watch": "nodemon --watch webpack.*.js --exec \"npm start\""
+    "watch": "nodemon --watch webpack.*.js --exec \"npm start\"",
+    "build:stats": "wp --mode production --json > stats.json"
   },
   "keywords": [],
   "author": "",
