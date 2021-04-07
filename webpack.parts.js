@@ -182,3 +182,10 @@ exports.setFreeVariable = (key, value) => {
     plugins: [new webpack.DefinePlugin(env)],
   };
 };
+
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+exports.autoAnalyzerPlugin = () => ({
+  plugins: [
+    new BundleAnalyzerPlugin()
+  ]
+})

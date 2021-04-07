@@ -28,15 +28,16 @@ const commonConfig = merge([
 ]);
 
 const productionConfig = merge([
-  { mode: "production" },
+  // parts.autoAnalyzerPlugin(),
   // parts.generateSourceMaps({ type: "hidden-source-map" }),
+  // { recordsPath: path.join(__dirname, "records.json") },  // records.json 存在的话，会影响build。需注意
   parts.generateSourceMaps({ type: "source-map" }),
+  { mode: "production" },
   parts.bundleSplit(),
   parts.attachRevision(),
   parts.minifyJavaScript(),
   parts.minifyCSS({ options: { preset: ["default"] } }),
   parts.eliminateUnusedCSS(),
-  { recordsPath: path.join(__dirname, "records.json") },
 ]);
 
 const developmentConfig = merge([
