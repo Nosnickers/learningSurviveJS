@@ -1,4 +1,4 @@
-const { mode, compi } = require("webpack-nano/argv");
+const { mode, compi, analyzeri } = require("webpack-nano/argv");
 const { merge } = require("webpack-merge");
 const parts = require("./webpack.parts");
 const path = require("path");
@@ -28,13 +28,13 @@ const commonConfig = merge([
 ]);
 
 const productionConfig = merge([
-  // parts.autoAnalyzerPlugin(),
+  parts.attachRevision(),
+  parts.autoAnalyzerPlugin(analyzeri),
   // parts.generateSourceMaps({ type: "hidden-source-map" }),
   // { recordsPath: path.join(__dirname, "records.json") },  // records.json 存在的话，会影响build。需注意
   parts.generateSourceMaps({ type: "source-map" }),
   { mode: "production" },
   parts.bundleSplit(),
-  parts.attachRevision(),
   parts.minifyJavaScript(),
   parts.minifyCSS({ options: { preset: ["default"] } }),
   parts.eliminateUnusedCSS(),
@@ -63,6 +63,8 @@ const getConfig = (mode = "production") => {
       return merge(commonConfig, developmentConfig, { mode, compi });
     case "development":
       return merge(commonConfig, developmentConfig, { mode });
+    case "build:prod-analyzer":
+      return merge(commonConfig, productionConfig, { mode, analyzeri });
     case "production":
     default:
       return merge(commonConfig, productionConfig, { mode });

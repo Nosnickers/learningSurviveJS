@@ -145,7 +145,7 @@ exports.generateSourceMaps = ({ type }) => {
   return {
     devtool: type,
     output: {
-      sourceMapFilename: "[file]-[chunkhash].map",
+      sourceMapFilename: "[file].map",
     },
   };
 };
@@ -183,9 +183,8 @@ exports.setFreeVariable = (key, value) => {
   };
 };
 
-const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-exports.autoAnalyzerPlugin = () => ({
-  plugins: [
-    new BundleAnalyzerPlugin()
-  ]
-})
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+  .BundleAnalyzerPlugin;
+exports.autoAnalyzerPlugin = (analyzeri) => ({
+  plugins: analyzeri ? [new BundleAnalyzerPlugin()] : [],
+});

@@ -11,7 +11,8 @@
     "build:legacy": "wp --mode prod:legacy",
     "build:modern": "wp --mode prod:modern",
     "watch": "nodemon --watch webpack.*.js --exec \"npm start\"",
-    "build:stats": "wp --mode production --json > stats.json"
+    "build:stats": "wp --mode production --json > stats.json",
+    "build:prod-analyzer": "wp --mode production --analyzeri 1"
   },
   "keywords": [],
   "author": "",
