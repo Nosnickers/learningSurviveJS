@@ -24,8 +24,18 @@ exports.devServer = (compi) => ({
   ],
 });
 
-exports.page = ({ title }) => ({
-  plugins: [new MiniHtmlWebpackPlugin({ context: { title } })],
+// exports.page = ({ title }) => ({
+//   plugins: [new MiniHtmlWebpackPlugin({ context: { title } })],
+// });
+exports.page = ({ title, url = "", chunks } = {}) => ({
+  plugins: [
+    new MiniHtmlWebpackPlugin({
+      publicPath: "/",
+      chunks,
+      filename: `${url && url + "/"}index.html`,
+      context: { title },
+    }),
+  ],
 });
 
 exports.loadCSS = () => ({
