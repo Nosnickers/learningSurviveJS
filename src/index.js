@@ -9,5 +9,6 @@ import { bake } from "./shake";
 
 bake();
 
-document.body.appendChild(component('2222'));
+const c1 = component('2222')
+document.body.appendChild(c1);
 document.body.appendChild(imgCpt());

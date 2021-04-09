@@ -13,7 +13,8 @@
     "watch": "nodemon --watch webpack.*.js --exec \"npm start\"",
     "build:stats": "wp --mode production --json > stats.json",
     "build:prod-analyzer": "wp --mode production --analyzeri 1",
-    "build:multi": "wp --config webpack.multi.js"
+    "build:multi": "wp --config webpack.multi.js",
+    "build:ssr": "wp --config webpack.ssr.js"
   },
   "keywords": [],
   "author": "",
@@ -25,6 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.13.14",
     "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
     "autoprefixer": "^10.2.5",
     "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
