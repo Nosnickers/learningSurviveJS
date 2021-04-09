@@ -14,7 +14,9 @@
     "build:stats": "wp --mode production --json > stats.json",
     "build:prod-analyzer": "wp --mode production --analyzeri 1",
     "build:multi": "wp --config webpack.multi.js",
-    "build:ssr": "wp --config webpack.ssr.js"
+    "build:ssr": "wp --config webpack.ssr.js",
+    "build:mf": "wp --config webpack.mf.js --mode production",
+    "start:mf": "wp --config webpack.mf.js --mode development"
   },
   "keywords": [],
   "author": "",

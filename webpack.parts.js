@@ -198,3 +198,16 @@ const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
 exports.autoAnalyzerPlugin = (analyzeri) => ({
   plugins: analyzeri ? [new BundleAnalyzerPlugin()] : [],
 });
+
+const { ModuleFederationPlugin } = require("webpack").container;
+exports.federateModule = ({ name, filename, exposes, remotes, shared }) => ({
+  plugins: [
+    new ModuleFederationPlugin({
+      name,
+      filename,
+      exposes,
+      remotes,
+      shared,
+    }),
+  ],
+});
