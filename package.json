@@ -16,7 +16,9 @@
     "build:multi": "wp --config webpack.multi.js",
     "build:ssr": "wp --config webpack.ssr.js",
     "build:mf": "wp --config webpack.mf.js --mode production",
-    "start:mf": "wp --config webpack.mf.js --mode development"
+    "start:mf": "wp --config webpack.mf.js --mode development",
+    "build:mf-header": "npm run build:mf -- --component header",
+    "start:mf-app": "npm run start:mf -- --component app"
   },
   "keywords": [],
   "author": "",

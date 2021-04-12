@@ -1,32 +1,47 @@
 const path = require("path");
-const { mode } = require("webpack-nano/argv");
+const { component, mode } = require("webpack-nano/argv");
 const { merge } = require("webpack-merge");
 const parts = require("./webpack.parts");
-const { ModuleFederationPlugin } = require("webpack").container;
 
 const commonConfig = merge([
   {
-    // entry: [path.join(__dirname, "src", "mf.js")],
-    entry: [path.join(__dirname, "src", 'mf', "bootstrap.js")],
     output: { publicPath: "/" },
   },
   parts.loadJavaScript(),
   parts.loadImages(),
   parts.page(),
   parts.extractCSS({ loaders: [parts.tailwind()] }),
-  {
-    plugins: [
-      new ModuleFederationPlugin({
-        name: "app",
-        remotes: {},
-        shared: {
-          react: { singleton: true },
-          "react-dom": { singleton: true },
-        },
-      }),
-    ],
-  },
 ]);
+
+const shared = {
+  react: { singleton: true },
+  "react-dom": { singleton: true },
+};
+
+const componentConfigs = {
+  app: merge(
+    {
+      entry: [path.join(__dirname, "src", "mf", "bootstrap.js")],
+    },
+    parts.page(),
+    parts.federateModule({
+      name: "app",
+      remotes: { mf: "mf@/mf.js" },
+      shared,
+    })
+  ),
+  header: merge(
+    {
+      entry: [path.join(__dirname, "src", "mf", "header.js")],
+    },
+    parts.federateModule({
+      name: "mf",
+      filename: "mf.js",
+      exposes: { "./mf/header": "./src/mf/header" },
+      shared,
+    })
+  ),
+};
 
 const configs = {
   development: merge(
@@ -36,4 +51,9 @@ const configs = {
   production: {},
 };
 
-module.exports = merge(commonConfig, configs[mode], { mode });
+module.exports = merge(
+  commonConfig,
+  configs[mode],
+  { mode },
+  componentConfigs[component]
+);
