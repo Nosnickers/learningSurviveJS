@@ -7,8 +7,11 @@ import "react-dom";
 
 import { bake } from "./shake";
 
+import componentWork from './component-work'
+
 bake();
 
 const c1 = component('2222')
 document.body.appendChild(c1);
 document.body.appendChild(imgCpt());
+document.body.appendChild(componentWork(333))
