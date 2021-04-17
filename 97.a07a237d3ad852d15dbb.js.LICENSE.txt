@@ -1,7 +1,0 @@
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-/*! 54023ee */
