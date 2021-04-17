@@ -5,7 +5,7 @@ const parts = require("./webpack.parts");
 
 const commonConfig = merge([
   {
-    output: { publicPath: "/" },
+    output: { publicPath: "/webpack-demo/" },
   },
   parts.loadJavaScript(),
   parts.loadImages(),
