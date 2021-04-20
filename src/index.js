@@ -1,6 +1,7 @@
 import component from "./component";
 import imgCpt from './img-cmpt'
-import "./main.css";
+// import "./main.css";
+import "!demo-loader?name=foo!./main.css";
 
 import "react";
 import "react-dom";

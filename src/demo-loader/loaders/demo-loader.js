@@ -1,12 +1,12 @@
-module.exports = function (input) {
-  const callback = this.async();
+const loaderUtils = require("loader-utils");
 
-  // No callback -> return synchronous results
-  // if (callback) { ... }
+module.exports = function (content) {
+  const { name } = loaderUtils.getOptions(this);
+  const url = loaderUtils.interpolateName(this, name, { content });
 
-  callback(null, input + input);
-  // callback(new Error("Demo error"));
+  this.emitFile(url, content);
+
+  const path = `__webpack_public_path__ + ${JSON.stringify(url)};`;
+
+  return `export default ${path}`;
 };
-
-module.exports.raw = true
-// module.exports = () => "foobar";
