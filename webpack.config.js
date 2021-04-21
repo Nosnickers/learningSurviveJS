@@ -4,18 +4,9 @@ const parts = require("./webpack.parts");
 const path = require("path");
 
 const cssLoaders = [parts.autoprefix(), parts.tailwind()];
-
+const customldr = require("./webpack.customloader");
 const commonConfig = merge([
-  {
-    resolveLoader: {
-      alias: {
-        "demo-loader": path.resolve(
-          __dirname,
-          "src/demo-loader/loaders/demo-loader.js"
-        ),
-      },
-    },
-  },
+  // customldr.customloaders(),
   {
     output: {
       path: path.resolve(process.cwd(), "dist"),

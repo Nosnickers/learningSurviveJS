@@ -1,4 +1,5 @@
 import "./component.css";
+// import "!pitch-loader?text=fooText!./component.css";
 
 export default (text = HELLO) => {
   const element = document.createElement("div");
