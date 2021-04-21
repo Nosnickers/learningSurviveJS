@@ -19,9 +19,10 @@
     "start:mf": "wp --config webpack.mf.js --mode development",
     "build:mf-header": "npm run build:mf -- --component header",
     "start:mf-app": "npm run start:mf -- --component app",
+    "deploy:gh-pages": "gh-pages -d dist",
     "test:mocha": "mocha tests",
     "test:mocha:watch": "wp --config webpack.mocha.js",
-    "deploy:gh-pages": "gh-pages -d dist"
+    "runner": "node src/demo-loader/run-loader.js"
   },
   "keywords": [],
   "author": "",

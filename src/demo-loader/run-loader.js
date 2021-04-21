@@ -12,6 +12,8 @@ runLoaders(
           name: "demo.[ext]",
         },
       },
+      // { loader: path.resolve(__dirname, "./loaders/pitch-loader") },
+      { loader: path.resolve(__dirname, "./loaders/cache-loader") },
     ],
     readResource: fs.readFile.bind(fs),
     context: { emitFile: () => {} },
