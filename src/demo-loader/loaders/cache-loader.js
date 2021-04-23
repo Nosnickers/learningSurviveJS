@@ -5,7 +5,7 @@ module.exports = function (content) {
   const callbacks = cache.get(this.resourcePath);
   callbacks.forEach((callback) => callback(null, content));
   cache.set(this.resourcePath, content);
-  console.log('exports' ,JSON.stringify(content, null, 4), JSON.stringify(this, null, 4))
+  // console.log('exports' ,JSON.stringify(content, null, 4), JSON.stringify(this, null, 4))
   return content;
 };
 module.exports.pitch = function () {
